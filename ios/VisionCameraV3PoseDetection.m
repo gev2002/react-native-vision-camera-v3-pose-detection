@@ -227,7 +227,7 @@
     return data;
 }
 
-VISION_EXPORT_FRAME_PROCESSOR(VisionCameraV3PoseDetection, detectPose)
+VISION_EXPORT_FRAME_PROCESSOR(VisionCameraV3PoseDetectionPlugin, detectPose)
 
 @end
 
