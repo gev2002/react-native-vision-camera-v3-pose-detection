@@ -1,6 +1,6 @@
 {
   "name": "react-native-vision-camera-v3-pose-detection",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "The Frame processor plugin for detecting pose using Google ML Kit library for react-native-vision-camera with high performance.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

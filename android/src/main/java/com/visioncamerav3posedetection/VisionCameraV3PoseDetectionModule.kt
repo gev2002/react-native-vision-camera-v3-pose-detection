@@ -12,21 +12,22 @@ import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions
 import com.mrousavy.camera.frameprocessor.Frame
 import com.mrousavy.camera.frameprocessor.FrameProcessorPlugin
 import com.mrousavy.camera.frameprocessor.VisionCameraProxy
+import com.mrousavy.camera.types.Orientation
 import java.util.HashMap
 
 class VisionCameraV3PoseDetectionModule(proxy : VisionCameraProxy, options: Map<String, Any>?): FrameProcessorPlugin() {
 
   override fun callback(frame: Frame, arguments: Map<String, Any>?): HashMap<String, Any> {
-    val options = PoseDetectorOptions.Builder()
-    if (arguments?.get("mode") === "stream") options.setDetectorMode(PoseDetectorOptions.STREAM_MODE)
-    else if (arguments?.get("mode") === "single") options.setDetectorMode(PoseDetectorOptions.SINGLE_IMAGE_MODE)
-    if (arguments?.get("performanceMode") === "min") options.setPreferredHardwareConfigs(PoseDetectorOptions.CPU)
-    else if (arguments?.get("performanceMode") === "max") options.setPreferredHardwareConfigs(PoseDetectorOptions.CPU_GPU)
-
     try {
+      val options = PoseDetectorOptions.Builder()
+      if (arguments?.get("mode") === "stream") options.setDetectorMode(PoseDetectorOptions.STREAM_MODE)
+      else if (arguments?.get("mode") === "single") options.setDetectorMode(PoseDetectorOptions.SINGLE_IMAGE_MODE)
+      if (arguments?.get("performanceMode") === "min") options.setPreferredHardwareConfigs(PoseDetectorOptions.CPU)
+      else if (arguments?.get("performanceMode") === "max") options.setPreferredHardwareConfigs(PoseDetectorOptions.CPU_GPU)
       val poseDetector = PoseDetection.getClient(options.build())
       val mediaImage: Image = frame.image
-      val image = InputImage.fromMediaImage(mediaImage, 0)
+      val orientation: Orientation = frame.orientation
+      val image = InputImage.fromMediaImage(mediaImage, orientation.toDegrees())
       val task: Task<Pose> = poseDetector.process(image)
       val pose: Pose = Tasks.await(task)
       val map = WritableNativeMap()

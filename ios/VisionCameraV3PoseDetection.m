@@ -34,7 +34,9 @@
         }
     }
     CMSampleBufferRef buffer = frame.buffer;
+    UIImageOrientation orientation = frame.orientation;
     MLKVisionImage *image = [[MLKVisionImage alloc] initWithBuffer:buffer];
+    image.orientation = orientation;
     MLKPoseDetector *poseDetector =[MLKPoseDetector poseDetectorWithOptions:options];
 
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
