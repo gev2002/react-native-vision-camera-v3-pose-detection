@@ -9,9 +9,10 @@ react-native-worklets-core = 0.4.0
 ## 💻 Installation
 
 ```sh
-npm install react-native-vision-camera-v3-pose-detection
 yarn add react-native-vision-camera-v3-pose-detection
+npm install react-native-vision-camera-v3-pose-detection
 ```
+
 ## 👷Features
     Easy To Use.
     Works Just Writing few lines of Code.
@@ -19,7 +20,7 @@ yarn add react-native-vision-camera-v3-pose-detection
     Works for Both Cameras.
     Works Fast.
     Works With Android 🤖 and IOS.📱
-    Writen With Objective-C and Kotlin.
+    Writen With Kotlin and Objective-C.
 
 ## 💡 Usage
 
