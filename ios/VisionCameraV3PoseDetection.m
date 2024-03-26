@@ -46,9 +46,10 @@
         [poseDetector processImage:image
                    completion:^(NSArray<MLKPose*> *_Nullable poses,
                               NSError *_Nullable error) {
-           if (error != nil) {
-              [NSException raise:@"Error processing Pose Detection" format:@"%@",error];
-          }
+            if (error != nil) {
+                RCTResponseErrorBlock error;
+                return;
+            }
             if (poses.count > 0) {
 
                 for (MLKPose *pose in poses) {
