@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef,type ForwardedRef } from 'react';
 import {
   Camera as VisionCamera,
   useFrameProcessor,
@@ -7,7 +7,7 @@ import { useRunInJS } from 'react-native-worklets-core';
 import { detectPose } from './detectPose';
 import type { CameraTypes, Frame, PoseType, FrameProcessor } from './types';
 
-export const Camera = (props: CameraTypes) => {
+export const Camera = forwardRef(function Camera(props: CameraTypes,ref:ForwardedRef<any>) {
   const { callback, device, options } = props;
   // @ts-ignore
   const useWorklets = useRunInJS((data: PoseType): void => {
@@ -24,6 +24,6 @@ export const Camera = (props: CameraTypes) => {
     []
   );
   return (
-    !!device && <VisionCamera frameProcessor={frameProcessor} {...props} />
+    !!device && <VisionCamera ref={ref} frameProcessor={frameProcessor} {...props} />
   );
-};
+});
